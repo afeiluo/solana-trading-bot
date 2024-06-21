@@ -227,13 +227,6 @@ const runListener = async () => {
     if (!exists && poolOpenTime > runTimestamp) {
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
-      await fetch(SLACK_URL, {
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          method: 'POST',
-          body: JSON.stringify({
-              text: `:robot_face::robot_face: token: <https://ave.ai/token/${poolState.baseMint.toString()}-solana|${poolState.baseMint.toString()}> :robot_face::robot_face:`
-          })
-      })
     }
   });
 

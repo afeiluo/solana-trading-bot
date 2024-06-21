@@ -18,7 +18,7 @@ import { Liquidity, LiquidityPoolKeysV4, LiquidityStateV4, Percent, Token, Token
 import { MarketCache, PoolCache, SnipeListCache } from './cache';
 import { PoolFilters } from './filters';
 import { TransactionExecutor } from './transactions';
-import { createPoolKeys, logger, NETWORK, sleep } from './helpers';
+import { createPoolKeys, logger, NETWORK, sleep, SLACK_URL } from './helpers';
 import { Mutex } from 'async-mutex';
 import BN from 'bn.js';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
@@ -141,7 +141,14 @@ export class Bot {
           logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
           return;
         } else {
-          //TODO
+          await fetch(SLACK_URL, {
+              headers: { "Content-Type": "application/json; charset=utf-8" },
+              method: 'POST',
+              body: JSON.stringify({
+                  text: `:robot_face::robot_face: token: <https://ave.ai/token/${poolState.baseMint.toString()}-solana|${poolState.baseMint.toString()}> :robot_face::robot_face:`
+              })
+          })
+
           return;
         }
         

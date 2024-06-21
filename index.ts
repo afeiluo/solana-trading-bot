@@ -237,7 +237,7 @@ const runListener = async () => {
     }
     return;
 
-    await bot.sell(updatedAccountInfo.accountId, accountData);
+    //await bot.sell(updatedAccountInfo.accountId, accountData);
   });
 
   printDetails(wallet, quoteToken, bot);

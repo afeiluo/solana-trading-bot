@@ -227,7 +227,7 @@ const runListener = async () => {
     if (!exists && poolOpenTime > runTimestamp) {
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
-      fetch(SLACK_URL, {
+      await fetch(SLACK_URL, {
           headers: { "Content-Type": "application/json; charset=utf-8" },
           method: 'POST',
           body: JSON.stringify({

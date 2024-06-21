@@ -142,7 +142,7 @@ export class Bot {
           return;
         }
          //noti slack
-         fetch('https://hooks.slack.com/services/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', {
+         fetch('https://hooks.slack.com/services/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', {
             headers: { "Content-Type": "application/json; charset=utf-8" },
             method: 'POST',
             body: JSON.stringify({

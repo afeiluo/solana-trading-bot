@@ -16,6 +16,7 @@ const retrieveEnvVariable = (variableName: string, logger: Logger) => {
 
 // Wallet
 export const PRIVATE_KEY = retrieveEnvVariable('PRIVATE_KEY', logger);
+export const SLACK_URL = retrieveEnvVariable('SLACK_URL', logger);
 
 // Connection
 export const NETWORK = 'mainnet-beta';

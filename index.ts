@@ -45,6 +45,7 @@ import {
   FILTER_CHECK_INTERVAL,
   FILTER_CHECK_DURATION,
   CONSECUTIVE_FILTER_MATCHES,
+  SLACK_URL
 } from './helpers';
 import { version } from './package.json';
 import { WarpTransactionExecutor } from './transactions/warp-transaction-executor';
@@ -226,7 +227,7 @@ const runListener = async () => {
     if (!exists && poolOpenTime > runTimestamp) {
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
-      fetch('https://hooks.slack.com/services/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', {
+      fetch(SLACK_URL, {
           headers: { "Content-Type": "application/json; charset=utf-8" },
           method: 'POST',
           body: JSON.stringify({

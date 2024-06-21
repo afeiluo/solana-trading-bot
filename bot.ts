@@ -102,6 +102,28 @@ export class Bot {
     return true;
   }
 
+  public async sendPostRequest(url: string, data: any): Promise<any> {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
+    }
+  }
+
   public async buy(accountId: PublicKey, poolState: LiquidityStateV4) {
     logger.trace({ mint: poolState.baseMint }, `Processing new pool...`);
 
@@ -142,13 +164,9 @@ export class Bot {
           return;
         } else {
           //noti slack
-          await fetch('https://hooks.slack.com/services/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', {
-            headers: { "Content-Type": "application/json; charset=utf-8" },
-            method: 'POST',
-            body: JSON.stringify({
-                text: `:robot_face::robot_face: token: <https://ave.ai/token/${poolKeys.baseMint.toString()}-solana|${poolKeys.baseMint.toString()}> :robot_face::robot_face:`
-            })
-          })
+          //`:robot_face::robot_face: token: <https://ave.ai/token/${poolKeys.baseMint.toString()}-solana|${poolKeys.baseMint.toString()}> :robot_face::robot_face:`
+          await this.sendPostRequest('https://hooks.slack.com/services/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', 
+                {text: 'hello world'})
           return;
         }
         

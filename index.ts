@@ -235,6 +235,7 @@ const runListener = async () => {
     if (accountData.mint.equals(quoteToken.mint)) {
       return;
     }
+    return;
 
     await bot.sell(updatedAccountInfo.accountId, accountData);
   });

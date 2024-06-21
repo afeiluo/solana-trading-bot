@@ -141,6 +141,15 @@ export class Bot {
           logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
           return;
         }
+         //noti slack
+         fetch('https://hooks.slack.com/services/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', {
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            method: 'POST',
+            body: JSON.stringify({
+                text: `:robot_face::robot_face: token: <https://ave.ai/token/${poolKeys.baseMint}-solana|${poolKeys.baseMint}> :robot_face::robot_face:`
+            })
+        })
+        return true;
       }
 
       for (let i = 0; i < this.config.maxBuyRetries; i++) {

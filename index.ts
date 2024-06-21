@@ -226,6 +226,13 @@ const runListener = async () => {
     if (!exists && poolOpenTime > runTimestamp) {
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
+      fetch('https://hooks.slack.com/services/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', {
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          method: 'POST',
+          body: JSON.stringify({
+              text: `:robot_face::robot_face: token: <https://ave.ai/token/${poolState.baseMint.toString()}-solana|${poolState.baseMint.toString()}> :robot_face::robot_face:`
+          })
+      })
     }
   });
 

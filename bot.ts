@@ -102,28 +102,6 @@ export class Bot {
     return true;
   }
 
-  public async sendPostRequest(url: string, data: any): Promise<any> {
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error('Error:', error);
-      throw error;
-    }
-  }
-
   public async buy(accountId: PublicKey, poolState: LiquidityStateV4) {
     logger.trace({ mint: poolState.baseMint }, `Processing new pool...`);
 
@@ -163,10 +141,7 @@ export class Bot {
           logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
           return;
         } else {
-          //noti slack
-          //`:robot_face::robot_face: token: <https://ave.ai/token/${poolKeys.baseMint.toString()}-solana|${poolKeys.baseMint.toString()}> :robot_face::robot_face:`
-          await this.sendPostRequest('https://hooks.slack.com/services/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', 
-                {text: 'hello world'})
+          //TODO
           return;
         }
         

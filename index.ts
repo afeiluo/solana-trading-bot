@@ -226,7 +226,7 @@ const runListener = async () => {
     if (!exists && poolOpenTime > runTimestamp) {
       poolCache.save(updatedAccountInfo.accountId.toString(), poolState);
       await bot.buy(updatedAccountInfo.accountId, poolState);
-      fetch('https://hooks.slack.com/services/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', {
+      fetch('https://hooks.slack.com/services/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', {
           headers: { "Content-Type": "application/json; charset=utf-8" },
           method: 'POST',
           body: JSON.stringify({

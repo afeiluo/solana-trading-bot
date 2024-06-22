@@ -137,18 +137,17 @@ export class Bot {
       if (!this.config.useSnipeList) {
         const match = await this.filterMatch(poolKeys);
 
-        await fetch(SLACK_URL, {
-            headers: { "Content-Type": "application/json; charset=utf-8" },
-            method: 'POST',
-            body: JSON.stringify({
-                text: `:robot_face::robot_face: token: <https://ave.ai/token/${poolState.baseMint.toString()}-solana|${poolState.baseMint.toString()}> :robot_face::robot_face:`
-            })
-        })
-
         if (!match) {
           logger.trace({ mint: poolKeys.baseMint.toString() }, `Skipping buy because pool doesn't match filters`);
           return;
         } else {
+          await fetch(SLACK_URL, {
+              headers: { "Content-Type": "application/json; charset=utf-8" },
+              method: 'POST',
+              body: JSON.stringify({
+                  text: `:partying_face::partying_face::partying_face: token: <https://ave.ai/token/${poolState.baseMint.toString()}-solana|${poolState.baseMint.toString()}> :partying_face::partying_face::partying_face:`
+              })
+          })
           return;
         }
         
